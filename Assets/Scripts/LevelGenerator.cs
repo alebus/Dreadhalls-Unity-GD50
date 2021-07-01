@@ -55,10 +55,19 @@ public class LevelGenerator : MonoBehaviour {
 
 					// flag as placed so we never consider placing again
 					characterPlaced = true;
+					// ensure player doesn't spawn without floor
+					CreateChildPrefab(floorPrefab, floorParent, x, 0, z);
 				}
 
+				
 				// create floor and ceiling
-				CreateChildPrefab(floorPrefab, floorParent, x, 0, z);
+				// small chance to not generate
+				if (Random.value < 0.05) {
+					// no floor
+				} else {
+					CreateChildPrefab(floorPrefab, floorParent, x, 0, z);
+				}
+					
 
 				if (generateRoof) {
 					CreateChildPrefab(ceilingPrefab, wallsParent, x, 4, z);
